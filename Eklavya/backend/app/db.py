@@ -1,6 +1,6 @@
 import os
 import time
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import OperationalError
@@ -15,7 +15,7 @@ def create_engine_with_retry(database_url, max_retries=30, delay=2):
             engine = create_engine(database_url)
             # Test the connection
             with engine.connect() as conn:
-                conn.execute("SELECT 1")
+                conn.execute(text("SELECT 1"))
             return engine
         except OperationalError as e:
             last_error = e
