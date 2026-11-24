@@ -59,9 +59,9 @@ const PROGRAMS = [
 ]
 
 const STATS = [
-  { value: '15+', label: 'Years of teaching', color: '#E8B04A' },
-  { value: '500+', label: 'Students taught', color: '#F08A4B' },
-  { value: '50+', label: 'Art exhibitions', color: '#6FC2BF' },
+  { value: '5+', label: 'Years of teaching', color: '#E8B04A' },
+  { value: '100+', label: 'Students taught', color: '#F08A4B' },
+  { value: '2', label: 'Art exhibitions', color: '#6FC2BF' },
   { value: '100%', label: 'Happy families', color: '#E994AE' },
 ]
 
