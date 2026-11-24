@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react'
 import { getGalleryImages } from '../api/client'
 import ImageGrid from '../components/ImageGrid'
-import { PALETTE, Blob, BrushStroke, WaveDivider } from '../components/Theme'
+import { Blob, BrushStroke, WaveDivider, Mandala, TapeStrip } from '../components/Theme'
 
 const PROGRAMS = [
   {
     title: 'Drawing & Sketching',
     text: 'Pencil, charcoal and ink fundamentals — shapes, shading, perspective and observational drawing.',
-    color: '#7B61FF',
+    color: '#2F3E6E',
     icon: (
       <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 3.5l4 4L7 21H3v-4L16.5 3.5z" />
@@ -17,7 +17,7 @@ const PROGRAMS = [
   {
     title: 'Painting Studio',
     text: 'Watercolor, acrylic and mixed media. Colour theory, composition and finding your own style.',
-    color: '#FF6B6B',
+    color: '#A8392A',
     icon: (
       <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
         <path
@@ -31,7 +31,7 @@ const PROGRAMS = [
   {
     title: "Kids' Art Corner",
     text: 'Playful, confidence-building classes for ages 4–15 — messy hands, big imaginations, proud smiles.',
-    color: '#F7B32B',
+    color: '#C08A2E',
     icon: (
       <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
         <path
@@ -45,7 +45,7 @@ const PROGRAMS = [
   {
     title: 'Crafts & Sculpture',
     text: 'Clay, papier-mâché and 3D projects that turn ideas into things you can hold and take home.',
-    color: '#2EC4B6',
+    color: '#2F6B5E',
     icon: (
       <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
         <path
@@ -59,10 +59,10 @@ const PROGRAMS = [
 ]
 
 const STATS = [
-  { value: '15+', label: 'Years of teaching', color: '#F7B32B' },
-  { value: '500+', label: 'Students taught', color: '#FF6B6B' },
-  { value: '50+', label: 'Art exhibitions', color: '#2EC4B6' },
-  { value: '100%', label: 'Happy families', color: '#A78BFA' },
+  { value: '15+', label: 'Years of teaching', color: '#E2BF7A' },
+  { value: '500+', label: 'Students taught', color: '#E8A584' },
+  { value: '50+', label: 'Art exhibitions', color: '#A9CDBB' },
+  { value: '100%', label: 'Happy families', color: '#E2BF7A' },
 ]
 
 export default function Home() {
@@ -80,24 +80,18 @@ export default function Home() {
     <div className="bg-paper font-sans text-ink">
       {/* ============ HERO ============ */}
       <section className="relative overflow-hidden bg-paper pt-14 pb-24 md:pt-20 md:pb-32">
-        <Blob color="#FF6B6B" className="top-[-6rem] left-[-4rem] w-[26rem] h-[26rem]" />
-        <Blob color="#F7B32B" className="top-10 right-[-6rem] w-[30rem] h-[30rem]" />
-        <Blob color="#7B61FF" className="bottom-[-8rem] left-1/3 w-[24rem] h-[24rem]" />
+        <Blob color="#A8392A" className="top-[-6rem] left-[-4rem] w-[26rem] h-[26rem]" />
+        <Blob color="#C08A2E" className="top-10 right-[-6rem] w-[30rem] h-[30rem]" />
+        <Blob color="#2F3E6E" className="bottom-[-8rem] left-1/3 w-[24rem] h-[24rem]" />
 
-        {/* floating palette dots */}
-        <div className="hidden md:flex absolute top-24 left-10 flex-col gap-3" aria-hidden="true">
-          {PALETTE.map((c) => (
-            <span
-              key={c}
-              className="w-4 h-4 rounded-full shadow-md animate-bounce"
-              style={{ backgroundColor: c, animationDelay: `${PALETTE.indexOf(c) * 0.15}s` }}
-            />
-          ))}
+        {/* lotus mandala behind the title */}
+        <div className="absolute left-1/2 top-8 -translate-x-1/2 w-[44rem] h-[44rem] max-w-none pointer-events-none" aria-hidden="true">
+          <Mandala className="w-full h-full text-paint-marigold/20 animate-spin-slow" />
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <p className="font-hand text-3xl md:text-4xl text-paint-coral mb-2 -rotate-2">
+            <p className="font-hand text-3xl md:text-4xl text-paint-coral mb-2">
               Welcome to the studio of
             </p>
 
@@ -110,15 +104,14 @@ export default function Home() {
             </h1>
 
             <p className="mt-8 text-lg md:text-xl text-ink/70 max-w-2xl mx-auto leading-relaxed">
-              Drawing, painting and craft classes where every child (and adult!) learns to see the
-              world like an artist — one brushstroke at a time.
+              Drawing, painting and craft classes in the spirit of Eklavya: devoted practice, a watchful
+              eye, and a teacher you carry with you. For children and adults alike.
             </p>
 
-            {/* paint palette row */}
-            <div className="flex justify-center gap-2 mt-8" aria-hidden="true">
-              {PALETTE.map((c) => (
-                <span key={c} className="w-7 h-7 rounded-full ring-4 ring-white shadow-md" style={{ backgroundColor: c }} />
-              ))}
+            {/* subhashita */}
+            <div className="mt-8">
+              <p className="font-deva text-2xl md:text-3xl text-paint-rose" lang="sa">विद्या ददाति विनयम्</p>
+              <p className="font-hand text-lg text-ink/60 mt-1">“Knowledge gives humility.”</p>
             </div>
 
             <div className="flex flex-wrap justify-center gap-4 mt-10">
@@ -138,12 +131,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* brush tape strip */}
-        <div className="absolute bottom-0 left-0 right-0 h-2 flex" aria-hidden="true">
-          {PALETTE.map((c) => (
-            <span key={c} className="flex-1" style={{ backgroundColor: c }} />
-          ))}
-        </div>
+        <TapeStrip className="absolute bottom-0 left-0 right-0" />
       </section>
 
       {/* ============ PROGRAMS ============ */}
@@ -161,7 +149,7 @@ export default function Home() {
             {PROGRAMS.map((p) => (
               <article
                 key={p.title}
-                className="group bg-paper rounded-3xl p-7 border border-ink/5 shadow-sm hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
+                className="group bg-paper rounded-2xl p-7 border border-paint-marigold/30 shadow-sm hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
               >
                 <div
                   className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 text-white shadow-md group-hover:rotate-6 transition-transform"
@@ -209,7 +197,7 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            <div className="relative bg-paper rounded-[2rem] p-8 md:p-10 shadow-sm border border-ink/5 overflow-hidden">
+            <div className="relative bg-paper rounded-2xl p-8 md:p-10 shadow-sm border border-paint-marigold/30 overflow-hidden">
               <span className="absolute top-6 right-6 w-10 h-10 rounded-full bg-paint-marigold/20" aria-hidden="true" />
               <div className="w-14 h-14 rounded-2xl bg-paint-coral text-white flex items-center justify-center shadow-md mb-6">
                 <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
@@ -225,7 +213,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="relative bg-paper rounded-[2rem] p-8 md:p-10 shadow-sm border border-ink/5 overflow-hidden">
+            <div className="relative bg-paper rounded-2xl p-8 md:p-10 shadow-sm border border-paint-marigold/30 overflow-hidden">
               <span className="absolute bottom-6 right-6 w-14 h-14 rounded-full bg-paint-teal/15" aria-hidden="true" />
               <div className="w-14 h-14 rounded-2xl bg-paint-violet text-white flex items-center justify-center shadow-md mb-6">
                 <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
@@ -262,7 +250,7 @@ export default function Home() {
       </section>
 
       {/* ============ STATS ============ */}
-      <WaveDivider from="#ffffff" to="#22262F" />
+      <WaveDivider from="#C08A2E" to="#2A1D14" />
       <section className="bg-ink py-14 md:py-16">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto text-center">
@@ -274,7 +262,7 @@ export default function Home() {
                 >
                   {s.value}
                 </div>
-                <div className="text-slate-300 text-sm md:text-base">{s.label}</div>
+                <div className="text-paper/70 text-sm md:text-base">{s.label}</div>
               </div>
             ))}
           </div>
@@ -284,7 +272,7 @@ export default function Home() {
       {/* ============ CTA ============ */}
       <section className="bg-ink pb-20 md:pb-24">
         <div className="container mx-auto px-4">
-          <div className="relative max-w-4xl mx-auto rounded-[2.5rem] bg-gradient-to-br from-paint-coral via-paint-rose to-paint-violet p-10 md:p-14 text-center overflow-hidden shadow-2xl">
+          <div className="relative max-w-4xl mx-auto rounded-3xl border border-paint-marigold/50 bg-gradient-to-br from-paint-coral via-paint-rose to-paint-violet p-10 md:p-14 text-center overflow-hidden shadow-2xl">
             <div
               className="absolute -top-16 -right-16 w-56 h-56 rounded-full bg-white/15 blur-2xl"
               aria-hidden="true"
@@ -293,7 +281,7 @@ export default function Home() {
               className="absolute -bottom-20 -left-10 w-64 h-64 rounded-full bg-white/10 blur-2xl"
               aria-hidden="true"
             />
-            <p className="font-hand text-3xl text-white/90 mb-2">Grab your brushes —</p>
+            <p className="font-hand text-3xl text-white/90 mb-2">Take up your bow, and your brush</p>
             <h2 className="font-display text-3xl md:text-5xl font-bold text-white mb-6">
               Start your artistic journey today
             </h2>

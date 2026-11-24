@@ -14,16 +14,17 @@ export default function Footer() {
               </span>
             </div>
             <p className="font-hand text-xl text-paint-marigold">Nurturing creativity since 2020</p>
+            <p className="font-deva text-lg text-paper/50 mt-2" lang="sa">विद्या ददाति विनयम्</p>
           </div>
 
           <div>
             <h3 className="text-white font-display font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2 text-sm">
-              <li><a href="/" className="hover:text-paint-coral transition">Home</a></li>
-              <li><a href="/gallery" className="hover:text-paint-coral transition">Gallery</a></li>
-              <li><a href="/kids" className="hover:text-paint-coral transition">Kids Corner</a></li>
-              <li><a href="/contact" className="hover:text-paint-coral transition">Contact</a></li>
-              <li><a href="/payment" className="hover:text-paint-coral transition">Payment</a></li>
+              <li><a href="/" className="hover:text-paint-marigold transition">Home</a></li>
+              <li><a href="/gallery" className="hover:text-paint-marigold transition">Gallery</a></li>
+              <li><a href="/kids" className="hover:text-paint-marigold transition">Kids Corner</a></li>
+              <li><a href="/contact" className="hover:text-paint-marigold transition">Contact</a></li>
+              <li><a href="/payment" className="hover:text-paint-marigold transition">Payment</a></li>
             </ul>
           </div>
 

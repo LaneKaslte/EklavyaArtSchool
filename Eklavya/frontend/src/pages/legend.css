@@ -1,0 +1,320 @@
+/* The Legend of Eklavya
+   Layout: a moonlit forest hero (night) gives way to a parchment scroll of
+   five chapters, a Sanskrit verse band in clay, and three lessons for artists. */
+.lg {
+  --night: #101a15;
+  --night-2: #1a2a22;
+  --leaf: #2c4436;
+  --parchment: #f1e6cf;
+  --parchment-2: #e6d6b5;
+  --ink: #2a1f17;
+  --ink-soft: #5c4a3a;
+  --ochre: #c8963e;
+  --ochre-soft: #e2bf7a;
+  --vermilion: #b4432a;
+  --clay: #9c5f3a;
+
+  --f-display: 'Cormorant Garamond', 'Cormorant', Georgia, 'Times New Roman', serif;
+  --f-body: 'EB Garamond', Georgia, 'Times New Roman', serif;
+  --f-deva: 'Tiro Devanagari Sanskrit', 'Noto Serif Devanagari', serif;
+  --f-label: 'EB Garamond', Georgia, serif;
+
+  font-family: var(--f-body);
+  color: var(--ink);
+  background: var(--parchment);
+}
+
+.lg-wrap {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+.lg-label {
+  font-family: var(--f-label);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* ---------- Hero ---------- */
+.lg-hero {
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 70% 10%, #24382d 0%, var(--night) 60%);
+  color: var(--parchment);
+  padding-block: 5.5rem 13rem;
+  text-align: center;
+}
+.lg-scene {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.lg-hero-inner { position: relative; z-index: 1; }
+.lg-hero .lg-label { color: var(--ochre-soft); }
+.lg-deva-ghost {
+  font-family: var(--f-deva);
+  font-size: clamp(5rem, 18vw, 13rem);
+  line-height: 1;
+  color: var(--ochre);
+  opacity: 0.12;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -62%);
+  white-space: nowrap;
+  user-select: none;
+}
+.lg-title {
+  position: relative;
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-style: italic;
+  font-size: clamp(4rem, 13vw, 9.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  margin: 1rem 0 0;
+}
+.lg-title-sub {
+  font-family: var(--f-deva);
+  font-size: 1.35rem;
+  color: var(--ochre-soft);
+  margin-top: 0.75rem;
+}
+.lg-hero-lede {
+  max-width: 34rem;
+  margin: 1.75rem auto 0;
+  font-size: 1.3rem;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--parchment) 82%, transparent);
+  text-wrap: balance;
+}
+
+/* arrow flight */
+.lg-arrow { animation: lg-fly 1.6s cubic-bezier(.2,.7,.25,1) 0.4s both; }
+.lg-target { transform-box: fill-box; transform-origin: center; animation: lg-thud 0.5s ease-out 1.95s both; }
+.lg-star { animation: lg-twinkle 4s ease-in-out infinite; }
+@keyframes lg-fly { from { transform: translateX(-1500px); } to { transform: translateX(0); } }
+@keyframes lg-thud {
+  0% { transform: translateX(0); }
+  30% { transform: translateX(6px); }
+  60% { transform: translateX(-2px); }
+  100% { transform: translateX(0); }
+}
+@keyframes lg-twinkle { 0%, 100% { opacity: 0.9; } 50% { opacity: 0.25; } }
+
+/* ---------- Intro ---------- */
+.lg-intro {
+  padding-block: 5rem 2rem;
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+@media (min-width: 860px) {
+  .lg-intro { grid-template-columns: 1fr 1.4fr; gap: 4rem; }
+}
+.lg-intro h2 {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+  line-height: 1.1;
+  margin: 0.6rem 0 0;
+  text-wrap: balance;
+}
+.lg-intro .lg-label { color: var(--vermilion); }
+.lg-prose { min-width: 0; }
+.lg-prose p {
+  font-size: 1.2rem;
+  line-height: 1.75;
+  max-width: 38rem;
+  margin: 0 0 1.1rem;
+  color: var(--ink-soft);
+}
+.lg-prose p:first-child::first-letter {
+  font-family: var(--f-display);
+  float: left;
+  font-size: 4.4rem;
+  line-height: 0.8;
+  padding: 0.35rem 0.6rem 0 0;
+  color: var(--vermilion);
+}
+
+/* ---------- Chapters ---------- */
+.lg-chapters { padding-block: 3rem 6rem; display: grid; gap: 4.5rem; }
+.lg-chapter {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+  align-items: center;
+}
+@media (min-width: 860px) {
+  .lg-chapter { grid-template-columns: 15rem 1fr; gap: 4rem; }
+  .lg-chapter:nth-child(even) { grid-template-columns: 1fr 15rem; }
+  .lg-chapter:nth-child(even) .lg-vignette { order: 2; }
+}
+.lg-vignette {
+  width: 100%;
+  max-width: 15rem;
+  aspect-ratio: 1;
+  justify-self: center;
+  border-radius: 50%;
+  background: var(--parchment-2);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--clay) 35%, transparent), inset 0 0 0 10px var(--parchment), inset 0 0 0 11px color-mix(in srgb, var(--clay) 25%, transparent);
+  display: grid;
+  place-items: center;
+}
+.lg-vignette svg { width: 62%; height: 62%; }
+.lg-chapter-body { min-width: 0; }
+.lg-numeral {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 1.6rem;
+  color: var(--ochre);
+}
+.lg-chapter h3 {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: clamp(1.8rem, 3.4vw, 2.5rem);
+  line-height: 1.15;
+  margin: 0.2rem 0 0.9rem;
+  text-wrap: balance;
+}
+.lg-chapter p {
+  font-size: 1.15rem;
+  line-height: 1.75;
+  color: var(--ink-soft);
+  max-width: 40rem;
+  margin: 0 0 0.9rem;
+}
+
+.lg-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--clay);
+}
+.lg-rule::before, .lg-rule::after {
+  content: '';
+  height: 1px;
+  width: min(9rem, 28vw);
+  background: currentColor;
+  opacity: 0.4;
+}
+
+/* ---------- Verse band ---------- */
+.lg-verse {
+  background: var(--clay);
+  background-image: radial-gradient(ellipse at 20% 0%, #b5734a 0%, transparent 60%), radial-gradient(ellipse at 90% 100%, #7d4729 0%, transparent 55%);
+  color: var(--parchment);
+  text-align: center;
+  padding-block: 5rem;
+}
+.lg-verse-deva {
+  font-family: var(--f-deva);
+  font-size: clamp(1.8rem, 4.5vw, 3rem);
+  line-height: 1.5;
+  margin: 1.25rem 0 0.5rem;
+}
+.lg-verse-iast {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 1.35rem;
+  color: color-mix(in srgb, var(--parchment) 80%, transparent);
+}
+.lg-verse-en {
+  font-size: 1.25rem;
+  max-width: 36rem;
+  margin: 1.5rem auto 0;
+  line-height: 1.6;
+  text-wrap: balance;
+}
+.lg-verse .lg-label { color: color-mix(in srgb, var(--parchment) 70%, transparent); }
+
+/* ---------- Lessons ---------- */
+.lg-lessons { background: var(--night); color: var(--parchment); padding-block: 5.5rem; }
+.lg-lessons-head { text-align: center; max-width: 40rem; margin: 0 auto 3.5rem; }
+.lg-lessons-head .lg-label { color: var(--ochre-soft); }
+.lg-lessons-head h2 {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: clamp(2.2rem, 4.5vw, 3.3rem);
+  line-height: 1.1;
+  margin: 0.7rem 0 0;
+  text-wrap: balance;
+}
+.lg-lesson-grid {
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+}
+.lg-lesson {
+  border-top: 1px solid color-mix(in srgb, var(--ochre) 50%, transparent);
+  padding-top: 1.5rem;
+  min-width: 0;
+}
+.lg-lesson svg { width: 2.5rem; height: 2.5rem; color: var(--ochre); }
+.lg-lesson h3 {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 1.65rem;
+  margin: 0.9rem 0 0.5rem;
+}
+.lg-lesson p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--parchment) 75%, transparent);
+  margin: 0;
+}
+
+/* ---------- Closing ---------- */
+.lg-close { text-align: center; padding-block: 5.5rem 4.5rem; }
+.lg-close blockquote {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: clamp(1.9rem, 4.2vw, 3rem);
+  line-height: 1.25;
+  max-width: 44rem;
+  margin: 1.5rem auto 0;
+  text-wrap: balance;
+}
+.lg-close blockquote em { color: var(--vermilion); font-style: italic; }
+.lg-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+.lg-btn {
+  font-family: var(--f-label);
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  padding: 0.9rem 1.8rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--ink);
+  transition: background-color .25s, color .25s, transform .25s;
+}
+.lg-btn:hover { transform: translateY(-2px); }
+.lg-btn-solid { background: var(--ink); color: var(--parchment); }
+.lg-btn-solid:hover { background: var(--vermilion); border-color: var(--vermilion); }
+.lg-btn-ghost { color: var(--ink); }
+.lg-btn-ghost:hover { background: var(--ink); color: var(--parchment); }
+.lg-btn:focus-visible { outline: 3px solid var(--ochre); outline-offset: 3px; }
+.lg-source {
+  margin-top: 3rem;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lg-arrow, .lg-target, .lg-star { animation: none; }
+}

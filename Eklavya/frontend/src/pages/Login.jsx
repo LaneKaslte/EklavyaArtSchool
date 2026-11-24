@@ -49,8 +49,8 @@ export default function Login({ mode = 'parent' }) {
 
   return (
     <div className="relative min-h-screen bg-paper py-16 overflow-hidden">
-      <Blob color="#2EC4B6" className="top-[-6rem] right-[-5rem] w-[22rem] h-[22rem]" />
-      <Blob color="#F7B32B" className="bottom-[-8rem] left-[-6rem] w-[24rem] h-[24rem]" />
+      <Blob color="#2F6B5E" className="top-[-6rem] right-[-5rem] w-[22rem] h-[22rem]" />
+      <Blob color="#C08A2E" className="bottom-[-8rem] left-[-6rem] w-[24rem] h-[24rem]" />
       <div className="container mx-auto px-4 max-w-md relative z-10">
         <div className="bg-white rounded-[2rem] shadow-xl border border-ink/5 p-8">
           <h1 className="font-display text-2xl font-bold text-ink mb-2">

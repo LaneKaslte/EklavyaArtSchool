@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+// Mahabharata palette: parchment & teak ink, kumkum red, temple gold,
+// peacock green, Krishna indigo, maroon silk, peacock blue.
 export default {
   content: [
     "./index.html",
@@ -7,20 +9,23 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        display: ['Fraunces', 'Georgia', 'serif'],
-        sans: ['Nunito', 'system-ui', 'sans-serif'],
-        hand: ['Caveat', 'cursive'],
+        display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        sans: ['"EB Garamond"', 'Georgia', 'serif'],
+        hand: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        deva: ['"Tiro Devanagari Sanskrit"', '"Noto Serif Devanagari"', 'serif'],
       },
       colors: {
-        paper: '#FFF8F0',
-        ink: '#22262F',
+        white: '#FBF6EA',
+        paper: '#F4EAD5',
+        ink: '#2A1D14',
+        gold: '#C08A2E',
         paint: {
-          coral: '#FF6B6B',
-          marigold: '#F7B32B',
-          teal: '#2EC4B6',
-          violet: '#7B61FF',
-          sky: '#4EA8DE',
-          rose: '#F075AA',
+          coral: '#A8392A',
+          marigold: '#C08A2E',
+          teal: '#2F6B5E',
+          violet: '#2F3E6E',
+          sky: '#2D5F7A',
+          rose: '#7B2D3B',
         },
       },
     },

@@ -26,6 +26,7 @@ export default function Navbar() {
             <Link to="/" className={linkClass}>Home</Link>
             <Link to="/gallery" className={linkClass}>Gallery</Link>
             <Link to="/kids" className={linkClass}>Kids Corner</Link>
+            <Link to="/legend" className={linkClass}>The Legend</Link>
             <Link to="/contact" className={linkClass}>Contact</Link>
             <Link to="/payment" className={linkClass}>Payment</Link>
             {isAdmin && (
@@ -77,6 +78,7 @@ export default function Navbar() {
             <Link to="/" onClick={() => setIsOpen(false)} className={`block ${linkClass}`}>Home</Link>
             <Link to="/gallery" onClick={() => setIsOpen(false)} className={`block ${linkClass}`}>Gallery</Link>
             <Link to="/kids" onClick={() => setIsOpen(false)} className={`block ${linkClass}`}>Kids Corner</Link>
+            <Link to="/legend" onClick={() => setIsOpen(false)} className={`block ${linkClass}`}>The Legend</Link>
             <Link to="/contact" onClick={() => setIsOpen(false)} className={`block ${linkClass}`}>Contact</Link>
             <Link to="/payment" onClick={() => setIsOpen(false)} className={`block ${linkClass}`}>Payment</Link>
             {isAdmin && (

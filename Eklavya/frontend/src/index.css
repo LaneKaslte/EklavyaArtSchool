@@ -5,29 +5,51 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    font-size: 17px; /* Garamond runs small; lift the whole scale slightly */
   }
-  
+
   body {
     @apply bg-paper text-ink font-sans;
     margin: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* faint paper grain */
+    background-image: radial-gradient(rgba(120, 80, 30, 0.06) 1px, transparent 1px);
+    background-size: 4px 4px;
+  }
+
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 2px solid #C08A2E;
+    outline-offset: 3px;
   }
 }
 
 @layer utilities {
+  /* eyebrow lines: elegant italic instead of handwriting */
+  .font-hand {
+    font-style: italic;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
   .animate-fadeIn {
     animation: fadeIn 0.5s ease-in;
   }
-  
+
   @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-spin-slow {
+    animation: spin 120s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-spin-slow, .animate-fadeIn { animation: none; }
   }
 }

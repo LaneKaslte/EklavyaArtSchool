@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import Gallery from './pages/Gallery'
 import Kids from './pages/Kids'
 import Contact from './pages/Contact'
+import Legend from './pages/Legend'
 import Payment from './pages/Payment'
 import Login from './pages/Login'
 import AdminPayments from './pages/AdminPayments'
@@ -21,6 +22,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/kids" element={<Kids />} />
+            <Route path="/legend" element={<Legend />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/payment" element={<Payment />} />
             <Route path="/login/parent" element={<Login mode="parent" />} />
