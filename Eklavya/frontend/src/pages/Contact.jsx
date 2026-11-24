@@ -5,7 +5,7 @@ import { PageHeader, inputClass, labelClass } from '../components/Theme'
 const INFO_ITEMS = [
   {
     title: 'Email',
-    text: 'info@eklavyaart.com',
+    text: 'eklavyaarts3@gmail.com',
     color: '#F075AA',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
@@ -146,7 +146,7 @@ export default function Contact() {
                 <label className={labelClass}>Email *</label>
                 <input
                   type="email"
-                  placeholder="your@email.com"
+                  placeholder="eklavyaarts3@gmail.com"
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                   className={inputClass}

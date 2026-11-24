@@ -1,4 +1,9 @@
+import { useState } from 'react'
+import ImageLightbox from './ImageLightbox'
+
 export default function ImageGrid({ images, loading }) {
+  const [openIndex, setOpenIndex] = useState(null)
+
   if (loading) {
     return (
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -28,7 +33,12 @@ export default function ImageGrid({ images, loading }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {images.map((img, idx) => (
-        <div key={idx} className="group relative overflow-hidden rounded-3xl bg-ink/5 border border-ink/5 shadow-sm hover:shadow-xl transition-shadow duration-300">
+        <button
+          type="button"
+          key={idx}
+          onClick={() => setOpenIndex(idx)}
+          aria-label={`View ${img.name} full size`}
+          className="group relative block w-full text-left overflow-hidden rounded-3xl bg-ink/5 border border-ink/5 shadow-sm hover:shadow-xl transition-shadow duration-300 cursor-zoom-in focus:outline-none focus-visible:ring-4 focus-visible:ring-paint-coral/50">
           <div className="aspect-square overflow-hidden">
             <img
               src={img.url}
@@ -39,10 +49,19 @@ export default function ImageGrid({ images, loading }) {
           <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <div className="absolute bottom-0 left-0 right-0 p-4">
               <p className="text-paper text-sm font-bold truncate">{img.name}</p>
+              <p className="text-paper/70 text-xs mt-1">Click to view full size</p>
             </div>
           </div>
-        </div>
+        </button>
       ))}
+      {openIndex !== null && (
+        <ImageLightbox
+          images={images}
+          index={openIndex}
+          onChange={setOpenIndex}
+          onClose={() => setOpenIndex(null)}
+        />
+      )}
     </div>
   )
 }
