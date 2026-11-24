@@ -42,7 +42,10 @@ def _user_response(user: User) -> UserResponse:
 
 def _login_user(user: User, expected_role: str) -> AuthResponse:
     if user.role != expected_role:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f"Please use {expected_role} login")
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail=f"This is {'an' if user.role == 'admin' else 'a'} {user.role} account. Please use the {user.role.capitalize()} Login page.",
+        )
     token = create_access_token(user.id, user.role)
     return AuthResponse(access_token=token, user=_user_response(user))
 

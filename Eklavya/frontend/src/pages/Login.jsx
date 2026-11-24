@@ -23,15 +23,23 @@ export default function Login({ mode = 'parent' }) {
     setLoading(true)
     try {
       let res
+      const creds = { email: form.email, password: form.password }
       if (registerMode) {
         res = await registerParent(form)
-      } else if (isAdmin) {
-        res = await loginAdmin({ email: form.email, password: form.password })
       } else {
-        res = await loginParent({ email: form.email, password: form.password })
+        try {
+          res = isAdmin ? await loginAdmin(creds) : await loginParent(creds)
+        } catch (err) {
+          // 403 = correct password, but the account belongs to the other login page.
+          // Log in through the matching endpoint instead of showing an error.
+          if (err.response?.status !== 403) throw err
+          res = isAdmin ? await loginParent(creds) : await loginAdmin(creds)
+        }
       }
       loginSuccess(res.data)
-      navigate(redirectTo, { replace: true })
+      const role = res.data.user.role
+      const home = role === 'admin' ? '/admin/payments' : '/payment'
+      navigate(role === mode ? redirectTo : home, { replace: true })
     } catch (err) {
       setError(err.response?.data?.detail || 'Login failed. Please try again.')
     } finally {
