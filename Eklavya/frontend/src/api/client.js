@@ -27,6 +27,9 @@ if (stored) setAuthToken(stored)
 export const getGalleryImages = (count = 12) =>
   api.get(`/images/gallery?count=${count}`)
 
+export const getAllGalleryImages = () =>
+  api.get('/images/gallery/all')
+
 export const getKidsImages = (count = 12) =>
   api.get(`/images/kids?count=${count}`)
 

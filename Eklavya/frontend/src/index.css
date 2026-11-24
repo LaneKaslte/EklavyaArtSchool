@@ -10,6 +10,11 @@
   body {
     @apply bg-paper text-ink font-sans;
     margin: 0;
+    /* faint warm vignette so the page reads as aged parchment */
+    background-image:
+      radial-gradient(ellipse at top, rgba(200, 150, 46, 0.08), transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(140, 28, 51, 0.06), transparent 60%);
+    background-attachment: fixed;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

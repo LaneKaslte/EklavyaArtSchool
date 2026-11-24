@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react'
 import { getGalleryImages } from '../api/client'
 import ImageGrid from '../components/ImageGrid'
-import { PALETTE, Blob, BrushStroke, WaveDivider } from '../components/Theme'
+import { PALETTE, Blob, BrushStroke, WaveDivider, TapeStrip, Chakra } from '../components/Theme'
 
 const PROGRAMS = [
   {
     title: 'Drawing & Sketching',
     text: 'Pencil, charcoal and ink fundamentals — shapes, shading, perspective and observational drawing.',
-    color: '#7B61FF',
+    color: '#8C1C33',
     icon: (
       <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 3.5l4 4L7 21H3v-4L16.5 3.5z" />
@@ -17,7 +17,7 @@ const PROGRAMS = [
   {
     title: 'Painting Studio',
     text: 'Watercolor, acrylic and mixed media. Colour theory, composition and finding your own style.',
-    color: '#FF6B6B',
+    color: '#D9631E',
     icon: (
       <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
         <path
@@ -31,7 +31,7 @@ const PROGRAMS = [
   {
     title: "Kids' Art Corner",
     text: 'Playful, confidence-building classes for ages 4–15 — messy hands, big imaginations, proud smiles.',
-    color: '#F7B32B',
+    color: '#C8962E',
     icon: (
       <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
         <path
@@ -45,7 +45,7 @@ const PROGRAMS = [
   {
     title: 'Crafts & Sculpture',
     text: 'Clay, papier-mâché and 3D projects that turn ideas into things you can hold and take home.',
-    color: '#2EC4B6',
+    color: '#1D6A72',
     icon: (
       <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
         <path
@@ -59,10 +59,10 @@ const PROGRAMS = [
 ]
 
 const STATS = [
-  { value: '15+', label: 'Years of teaching', color: '#F7B32B' },
-  { value: '500+', label: 'Students taught', color: '#FF6B6B' },
-  { value: '50+', label: 'Art exhibitions', color: '#2EC4B6' },
-  { value: '100%', label: 'Happy families', color: '#A78BFA' },
+  { value: '15+', label: 'Years of teaching', color: '#E8B04A' },
+  { value: '500+', label: 'Students taught', color: '#F08A4B' },
+  { value: '50+', label: 'Art exhibitions', color: '#6FC2BF' },
+  { value: '100%', label: 'Happy families', color: '#E994AE' },
 ]
 
 export default function Home() {
@@ -80,9 +80,10 @@ export default function Home() {
     <div className="bg-paper font-sans text-ink">
       {/* ============ HERO ============ */}
       <section className="relative overflow-hidden bg-paper pt-14 pb-24 md:pt-20 md:pb-32">
-        <Blob color="#FF6B6B" className="top-[-6rem] left-[-4rem] w-[26rem] h-[26rem]" />
-        <Blob color="#F7B32B" className="top-10 right-[-6rem] w-[30rem] h-[30rem]" />
-        <Blob color="#7B61FF" className="bottom-[-8rem] left-1/3 w-[24rem] h-[24rem]" />
+        <Blob color="#D9631E" className="top-[-6rem] left-[-4rem] w-[26rem] h-[26rem]" />
+        <Blob color="#C8962E" className="top-10 right-[-6rem] w-[30rem] h-[30rem]" />
+        <Blob color="#8C1C33" className="bottom-[-8rem] left-1/3 w-[24rem] h-[24rem]" />
+        <Chakra className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[34rem] h-[34rem] md:w-[44rem] md:h-[44rem] text-paint-marigold opacity-[0.10] animate-[spin_120s_linear_infinite] motion-reduce:animate-none" />
 
         {/* floating palette dots */}
         <div className="hidden md:flex absolute top-24 left-10 flex-col gap-3" aria-hidden="true">
@@ -97,15 +98,15 @@ export default function Home() {
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <p className="font-hand text-3xl md:text-4xl text-paint-coral mb-2 -rotate-2">
+            <p className="font-hand text-3xl md:text-4xl text-paint-coral mb-3">
               Welcome to the studio of
             </p>
 
-            <h1 className="font-display font-black text-5xl md:text-7xl lg:text-8xl leading-[1.05] text-ink">
+            <h1 className="font-display font-black text-5xl md:text-7xl lg:text-8xl leading-[1.05] text-ink tracking-wide">
               Eklavya{' '}
               <span className="relative inline-block">
                 <span className="relative z-10">Art School</span>
-                <BrushStroke className="absolute -bottom-3 left-0 w-full h-6 md:h-7 text-paint-teal/80" />
+                <BrushStroke className="absolute -bottom-5 left-0 w-full h-5 md:h-6 text-paint-marigold" />
               </span>
             </h1>
 
@@ -124,13 +125,13 @@ export default function Home() {
             <div className="flex flex-wrap justify-center gap-4 mt-10">
               <a
                 href="/contact"
-                className="px-8 py-4 bg-ink text-paper rounded-full font-bold tracking-wide hover:bg-paint-coral transition-all duration-300 shadow-lg hover:shadow-paint-coral/40 hover:-translate-y-1"
+                className="px-8 py-4 bg-ink text-paper rounded-full font-bold tracking-wide ring-2 ring-paint-marigold/60 hover:bg-paint-coral transition-all duration-300 shadow-lg hover:shadow-paint-coral/40 hover:-translate-y-1"
               >
                 Book a Trial Class
               </a>
               <a
                 href="/gallery"
-                className="px-8 py-4 bg-white text-ink rounded-full font-bold tracking-wide border-2 border-ink/10 hover:border-ink transition-all duration-300 hover:-translate-y-1 shadow-sm"
+                className="px-8 py-4 bg-white text-ink rounded-full font-bold tracking-wide border-2 border-paint-marigold/50 hover:border-ink transition-all duration-300 hover:-translate-y-1 shadow-sm"
               >
                 View the Gallery →
               </a>
@@ -138,12 +139,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* brush tape strip */}
-        <div className="absolute bottom-0 left-0 right-0 h-2 flex" aria-hidden="true">
-          {PALETTE.map((c) => (
-            <span key={c} className="flex-1" style={{ backgroundColor: c }} />
-          ))}
-        </div>
+        <TapeStrip className="absolute bottom-0 left-0 right-0" />
       </section>
 
       {/* ============ PROGRAMS ============ */}
@@ -161,7 +157,7 @@ export default function Home() {
             {PROGRAMS.map((p) => (
               <article
                 key={p.title}
-                className="group bg-paper rounded-3xl p-7 border border-ink/5 shadow-sm hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
+                className="group bg-paper rounded-3xl p-7 border border-paint-marigold/30 shadow-sm hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
               >
                 <div
                   className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 text-white shadow-md group-hover:rotate-6 transition-transform"
@@ -209,7 +205,7 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            <div className="relative bg-paper rounded-[2rem] p-8 md:p-10 shadow-sm border border-ink/5 overflow-hidden">
+            <div className="relative bg-paper rounded-[2rem] p-8 md:p-10 shadow-sm border border-paint-marigold/30 overflow-hidden">
               <span className="absolute top-6 right-6 w-10 h-10 rounded-full bg-paint-marigold/20" aria-hidden="true" />
               <div className="w-14 h-14 rounded-2xl bg-paint-coral text-white flex items-center justify-center shadow-md mb-6">
                 <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
@@ -225,7 +221,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="relative bg-paper rounded-[2rem] p-8 md:p-10 shadow-sm border border-ink/5 overflow-hidden">
+            <div className="relative bg-paper rounded-[2rem] p-8 md:p-10 shadow-sm border border-paint-marigold/30 overflow-hidden">
               <span className="absolute bottom-6 right-6 w-14 h-14 rounded-full bg-paint-teal/15" aria-hidden="true" />
               <div className="w-14 h-14 rounded-2xl bg-paint-violet text-white flex items-center justify-center shadow-md mb-6">
                 <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
@@ -262,7 +258,7 @@ export default function Home() {
       </section>
 
       {/* ============ STATS ============ */}
-      <WaveDivider from="#ffffff" to="#22262F" />
+      <WaveDivider from="#ffffff" to="#2A0F0F" />
       <section className="bg-ink py-14 md:py-16">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto text-center">
@@ -274,7 +270,7 @@ export default function Home() {
                 >
                   {s.value}
                 </div>
-                <div className="text-slate-300 text-sm md:text-base">{s.label}</div>
+                <div className="text-paper/70 text-sm md:text-base">{s.label}</div>
               </div>
             ))}
           </div>
@@ -284,7 +280,7 @@ export default function Home() {
       {/* ============ CTA ============ */}
       <section className="bg-ink pb-20 md:pb-24">
         <div className="container mx-auto px-4">
-          <div className="relative max-w-4xl mx-auto rounded-[2.5rem] bg-gradient-to-br from-paint-coral via-paint-rose to-paint-violet p-10 md:p-14 text-center overflow-hidden shadow-2xl">
+          <div className="relative max-w-4xl mx-auto rounded-[2.5rem] bg-gradient-to-br from-paint-coral via-paint-violet to-ink ring-2 ring-paint-marigold/70 ring-offset-4 ring-offset-ink p-10 md:p-14 text-center overflow-hidden shadow-2xl">
             <div
               className="absolute -top-16 -right-16 w-56 h-56 rounded-full bg-white/15 blur-2xl"
               aria-hidden="true"

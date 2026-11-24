@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
-import { PALETTE, TapeStrip } from './Theme'
+import { TapeStrip } from './Theme'
 
 const linkClass =
-  'px-4 py-2 text-ink/70 hover:text-ink hover:bg-ink/5 rounded-lg transition font-bold font-sans text-[0.95rem]'
+  'px-4 py-2 text-ink/70 hover:text-ink hover:bg-paint-marigold/15 rounded-lg transition font-bold font-sans text-[0.95rem]'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -16,7 +16,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center space-x-3">
             <img src="/logo.png" alt="Eklavya Art School" className="h-10 w-10 object-contain" />
-            <span className="font-display text-xl font-bold text-ink">
+            <span className="font-display text-xl font-bold text-ink tracking-wide">
               Eklavya <span className="text-paint-coral">Art School</span>
             </span>
           </Link>
@@ -51,7 +51,7 @@ export default function Navbar() {
                 </Link>
                 <Link
                   to="/login/admin"
-                  className="ml-2 px-6 py-2 bg-ink text-paper rounded-full hover:bg-paint-coral transition font-bold shadow-sm hover:shadow-paint-coral/40"
+                  className="ml-2 px-6 py-2 bg-ink text-paper rounded-full ring-2 ring-paint-marigold/60 hover:bg-paint-coral transition font-bold shadow-sm hover:shadow-paint-coral/40"
                 >
                   Admin login
                 </Link>
