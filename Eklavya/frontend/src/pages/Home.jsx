@@ -58,6 +58,13 @@ const PROGRAMS = [
   },
 ]
 
+const JUMP_LINKS = [
+  { href: '#classes', label: 'Classes' },
+  { href: '#artwork', label: 'Artwork' },
+  { href: '#about', label: 'Our Story' },
+  { href: '#join', label: 'Join Us' },
+]
+
 const STATS = [
   { value: '5+', label: 'Years of teaching', color: '#E8B04A' },
   { value: '100+', label: 'Students taught', color: '#F08A4B' },
@@ -79,7 +86,7 @@ export default function Home() {
   return (
     <div className="bg-paper font-sans text-ink">
       {/* ============ HERO ============ */}
-      <section className="relative overflow-hidden bg-paper pt-14 pb-24 md:pt-20 md:pb-32">
+      <section className="relative overflow-hidden bg-paper pt-12 pb-24 md:pt-16 md:pb-28">
         <Blob color="#D9631E" className="top-[-6rem] left-[-4rem] w-[26rem] h-[26rem]" />
         <Blob color="#C8962E" className="top-10 right-[-6rem] w-[30rem] h-[30rem]" />
         <Blob color="#8C1C33" className="bottom-[-8rem] left-1/3 w-[24rem] h-[24rem]" />
@@ -116,13 +123,13 @@ export default function Home() {
             </p>
 
             {/* paint palette row */}
-            <div className="flex justify-center gap-2 mt-8" aria-hidden="true">
+            <div className="flex justify-center gap-2 mt-6" aria-hidden="true">
               {PALETTE.map((c) => (
                 <span key={c} className="w-7 h-7 rounded-full ring-4 ring-white shadow-md" style={{ backgroundColor: c }} />
               ))}
             </div>
 
-            <div className="flex flex-wrap justify-center gap-4 mt-10">
+            <div className="flex flex-wrap justify-center gap-4 mt-8">
               <a
                 href="/contact"
                 className="px-8 py-4 bg-ink text-paper rounded-full font-bold tracking-wide ring-2 ring-paint-marigold/60 hover:bg-paint-coral transition-all duration-300 shadow-lg hover:shadow-paint-coral/40 hover:-translate-y-1"
@@ -136,14 +143,48 @@ export default function Home() {
                 View the Gallery →
               </a>
             </div>
+
           </div>
         </div>
+
+        {/* scroll cue */}
+        <a
+          href="#classes"
+          aria-label="Scroll down to see our classes"
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 text-paint-violet hover:text-paint-coral transition group"
+        >
+          <span className="text-xs font-bold uppercase tracking-[0.2em]">Scroll</span>
+          <span className="w-10 h-10 rounded-full bg-white border-2 border-paint-marigold/70 shadow-md flex items-center justify-center animate-bounce motion-reduce:animate-none">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v15m0 0l-6-6m6 6l6-6" />
+            </svg>
+          </span>
+        </a>
 
         <TapeStrip className="absolute bottom-0 left-0 right-0" />
       </section>
 
+      {/* ============ EXPLORE BELOW ============ */}
+      <div className="bg-paper py-8">
+        {/* quick links to the sections below */}
+        <nav aria-label="On this page" className="container mx-auto px-4 text-center">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-ink/50 mb-3">Explore below</p>
+          <div className="flex flex-wrap justify-center gap-2">
+            {JUMP_LINKS.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                className="px-4 py-1.5 rounded-full text-sm font-bold text-ink/80 bg-white/70 border border-paint-marigold/50 hover:bg-paint-marigold hover:text-white hover:border-paint-marigold transition"
+              >
+                {l.label} ↓
+              </a>
+            ))}
+          </div>
+        </nav>
+      </div>
+
       {/* ============ PROGRAMS ============ */}
-      <section className="py-20 md:py-24 bg-white">
+      <section id="classes" className="scroll-mt-20 py-20 md:py-24 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-14">
             <p className="font-hand text-2xl text-paint-violet">What we teach</p>
@@ -174,7 +215,7 @@ export default function Home() {
       </section>
 
       {/* ============ FEATURED ARTWORK ============ */}
-      <section className="py-20 md:py-24 bg-paper">
+      <section id="artwork" className="scroll-mt-20 py-20 md:py-24 bg-paper">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <p className="font-hand text-2xl text-paint-rose">Fresh from the easel</p>
@@ -194,7 +235,7 @@ export default function Home() {
       </section>
 
       {/* ============ ABOUT / INSTRUCTOR ============ */}
-      <section className="py-20 md:py-24 bg-white">
+      <section id="about" className="scroll-mt-20 py-20 md:py-24 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-14">
             <p className="font-hand text-2xl text-paint-teal">Our story</p>
@@ -278,7 +319,7 @@ export default function Home() {
       </section>
 
       {/* ============ CTA ============ */}
-      <section className="bg-ink pb-20 md:pb-24">
+      <section id="join" className="scroll-mt-20 bg-ink pb-20 md:pb-24">
         <div className="container mx-auto px-4">
           <div className="relative max-w-4xl mx-auto rounded-[2.5rem] bg-gradient-to-br from-paint-coral via-paint-violet to-ink ring-2 ring-paint-marigold/70 ring-offset-4 ring-offset-ink p-10 md:p-14 text-center overflow-hidden shadow-2xl">
             <div

@@ -1,5 +1,9 @@
+import io
 import os
 import random
+from collections import OrderedDict
+from urllib.parse import quote
+
 from azure.storage.blob import BlobServiceClient
 
 CONNECTION_STRING = os.getenv("AZURE_STORAGE_CONNECTION_STRING")
@@ -7,6 +11,16 @@ GALLERY_CONTAINER = os.getenv("AZURE_CONTAINER_GALLERY", "gallery")
 KIDS_CONTAINER = os.getenv("AZURE_CONTAINER_KIDS", "kids")
 
 _blob_service_client = None
+
+# Most browsers (everything except recent Safari) can't display HEIC/HEIF,
+# so blobs with these extensions are served through the API as JPEG instead.
+HEIC_EXTENSIONS = ('.heic', '.heif')
+_JPEG_CACHE_MAX = 64
+_jpeg_cache: "OrderedDict[tuple[str, str], bytes]" = OrderedDict()
+
+
+def is_heic(name: str) -> bool:
+    return name.lower().endswith(HEIC_EXTENSIONS)
 
 def _get_blob_service_client():
     global _blob_service_client
@@ -50,12 +64,16 @@ def _to_image_dicts(container_client, blobs):
     # For production Azure: use blob client URL
     urls = []
     for blob in blobs:
-        blob_client = container_client.get_blob_client(blob.name)
-        url = blob_client.url
+        if is_heic(blob.name):
+            # Relative URL; the frontend resolves it against the API base URL.
+            url = f"/api/images/file/{container_client.container_name}/{quote(blob.name)}"
+        else:
+            blob_client = container_client.get_blob_client(blob.name)
+            url = blob_client.url
 
-        # If using Azurite (contains 'devstoreaccount1'), replace internal Docker hostname with localhost
-        if 'devstoreaccount1' in url and 'azurite' in url:
-            url = url.replace('azurite', 'localhost')
+            # If using Azurite (contains 'devstoreaccount1'), replace internal Docker hostname with localhost
+            if 'devstoreaccount1' in url and 'azurite' in url:
+                url = url.replace('azurite', 'localhost')
 
         urls.append({
             "name": blob.name,
@@ -78,3 +96,29 @@ def get_all_images(container_name: str):
         return []
     blobs.sort(key=lambda b: b.name.lower())
     return _to_image_dicts(container_client, blobs)
+
+
+def get_heic_as_jpeg(container_name: str, blob_name: str) -> bytes:
+    """Download a HEIC/HEIF blob and return it converted to JPEG (cached in memory)."""
+    key = (container_name, blob_name)
+    if key in _jpeg_cache:
+        _jpeg_cache.move_to_end(key)
+        return _jpeg_cache[key]
+
+    from PIL import Image, ImageOps
+    from pillow_heif import register_heif_opener
+    register_heif_opener()
+
+    blob_client = _get_blob_service_client().get_blob_client(container=container_name, blob=blob_name)
+    raw = blob_client.download_blob().readall()
+
+    with Image.open(io.BytesIO(raw)) as img:
+        img = ImageOps.exif_transpose(img).convert("RGB")
+        out = io.BytesIO()
+        img.save(out, format="JPEG", quality=88, optimize=True)
+    data = out.getvalue()
+
+    _jpeg_cache[key] = data
+    if len(_jpeg_cache) > _JPEG_CACHE_MAX:
+        _jpeg_cache.popitem(last=False)
+    return data

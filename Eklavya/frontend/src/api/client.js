@@ -24,14 +24,24 @@ const stored = (() => {
 })()
 if (stored) setAuthToken(stored)
 
+// Some image URLs (e.g. HEIC photos converted to JPEG by the backend) come back
+// relative to the API host — make them absolute so <img> can load them.
+const withImageUrls = (request) =>
+  request.then((res) => {
+    res.data.images = (res.data.images || []).map((img) =>
+      img.url?.startsWith('/') ? { ...img, url: `${API_URL}${img.url}` } : img
+    )
+    return res
+  })
+
 export const getGalleryImages = (count = 12) =>
-  api.get(`/images/gallery?count=${count}`)
+  withImageUrls(api.get(`/images/gallery?count=${count}`))
 
 export const getAllGalleryImages = () =>
-  api.get('/images/gallery/all')
+  withImageUrls(api.get('/images/gallery/all'))
 
 export const getKidsImages = (count = 12) =>
-  api.get(`/images/kids?count=${count}`)
+  withImageUrls(api.get(`/images/kids?count=${count}`))
 
 export const submitContact = (data) =>
   api.post('/contact', data)
